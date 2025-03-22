@@ -3,6 +3,11 @@ const userConrtoller = require("../controllers/userController")
 const upload = require("../middelwares/uploads"); // Upload middleware
 const campaignController = require("../controllers/campaignController");
 const leadController = require("../controllers/leadController")
+const followupController = require("../controllers/followupController")
+const customerController = require("../controllers/customerController")
+const contactController = require("../controllers/contactController")
+
+
 
 const router = express.Router();
 // add user register
@@ -41,5 +46,23 @@ router.get("/lead-view/:id", leadController.getLeadById);
 router.delete("/leads/:id", leadController.deleteLead);
 // update lead
 router.put("/leads/:id", leadController.updateLead);
+
+// add followup 
+router.post("/add-followup", followupController.addFollowupController)
+
+// add customer
+router.post("/add-customer", customerController.addCustomer);
+
+// Route for managers (fetch all customers)
+router.get("/customers", customerController.getAddedCustomers);
+
+// Route for salespeople (fetch only their added customers)
+router.get("/customer-view/:id", customerController.getCustomerById);
+// edit
+router.put("/customer-edit/:id", customerController.updateCustomerById);
+// delete
+router.delete("/customer-delete/:id", customerController.deleteCustomerById);
+// add contact
+router.post("/contact", contactController.submitContactForm);
 
 module.exports = router;
