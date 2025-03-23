@@ -48,7 +48,12 @@ router.delete("/leads/:id", leadController.deleteLead);
 router.put("/leads/:id", leadController.updateLead);
 
 // add followup 
-router.post("/add-followup", followupController.addFollowupController)
+router.post("/followup-add", followupController.addFollowup)
+    // get all followup
+router.get("/follow-up", followupController.getAddedFollowp);
+
+// get followup
+router.get("/followup-view/:id", followupController.getFollowupById);
 
 // add customer
 router.post("/add-customer", customerController.addCustomer);
