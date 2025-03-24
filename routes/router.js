@@ -6,7 +6,7 @@ const leadController = require("../controllers/leadController")
 const followupController = require("../controllers/followupController")
 const customerController = require("../controllers/customerController")
 const contactController = require("../controllers/contactController")
-
+const authMiddleware = require("../middelwares/authMiddelwares")
 
 
 const router = express.Router();
@@ -56,7 +56,7 @@ router.get("/follow-up", followupController.getAddedFollowp);
 router.get("/followup-view/:id", followupController.getFollowupById);
 
 // add customer
-router.post("/add-customer", customerController.addCustomer);
+router.post("/customer-add", customerController.addCustomer);
 
 // Route for managers (fetch all customers)
 router.get("/customers", customerController.getAddedCustomers);

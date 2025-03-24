@@ -3,14 +3,14 @@ const Customer = require("../models/customerModel");
 // ✅ Add a new customer (with salesperson tracking)
 exports.addCustomer = async(req, res) => {
     try {
+        console.log("Received Data:", req.body); // Log incoming request data
+
         const { name, email, phone, address, company, industry, website, notes } = req.body;
 
-        // Ensure salesperson info is available
-        if (!req.user || !req.user.username) {
-            return res.status(401).json({ error: "Unauthorized: Salesperson info missing" });
+        // Validate required fields
+        if (!name || !email || !phone || !address || !company || !industry || !website) {
+            return res.status(400).json({ error: "All required fields must be filled" });
         }
-
-        console.log("Inside addCustomerController", req.body);
 
         const newCustomer = new Customer({
             name,
@@ -20,17 +20,34 @@ exports.addCustomer = async(req, res) => {
             company,
             industry,
             website,
-            notes,
-            assignedTo: req.user.username, // ✅ Make sure this field is consistent
+            notes
         });
 
         await newCustomer.save();
-        res.status(201).json({ message: "Customer added successfully", customer: newCustomer });
+        return res.status(201).json({ message: "Customer added successfully", customer: newCustomer });
     } catch (error) {
-        console.error("Error adding customer:", error);
-        res.status(500).json({ error: "Failed to add customer" });
+        console.error("Error adding customer:", error.message);
+        res.status(500).json({ error: "Failed to add customer", details: error.message });
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 exports.getAddedCustomers = async(req, res) => {
     try {

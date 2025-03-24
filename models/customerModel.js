@@ -8,7 +8,8 @@ const customerSchema = new mongoose.Schema({
     company: { type: String, required: true },
     industry: { type: String, required: true },
     website: { type: String, required: true },
-    notes: { type: String }
+    notes: { type: String },
+    // assignedTo: { type: String, required: true } // assignedTo: String
 });
 
 module.exports = mongoose.model("Customer", customerSchema);
