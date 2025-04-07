@@ -1,5 +1,5 @@
 const users = require("../models/usermodel");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken")
 
 
@@ -20,7 +20,7 @@ exports.addUserController = async(req, res) => {
         }
 
         // Hash password
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = awaitbcrypt.compare(password, 10);
 
         // Create new user
         const newUser = new users({ username, email, password: hashedPassword, role });
